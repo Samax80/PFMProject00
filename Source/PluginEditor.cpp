@@ -31,7 +31,7 @@ void Pfmproject00AudioProcessorEditor::paint (Graphics& g)
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
 
     g.setColour (Colours::white);
-    g.setFont (18.0f);
+    g.setFont (19.0f);
     g.drawFittedText ("Hello World!", getLocalBounds(), Justification::centred, 1);
 }
 
