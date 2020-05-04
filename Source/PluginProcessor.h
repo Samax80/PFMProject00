@@ -54,7 +54,8 @@ public:
     //==============================================================================
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
-	bool shouldPlaySound = false;
+	
+	AudioParameterBool* shouldPlaySound= nullptr ; 
 private:
 	Random r;
 	

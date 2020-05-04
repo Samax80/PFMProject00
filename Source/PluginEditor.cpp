@@ -53,7 +53,7 @@ void Pfmproject00AudioProcessorEditor::resized()
 void Pfmproject00AudioProcessorEditor::mouseUp(const MouseEvent& e)
 {
 //	DBG("mouse is Up");
-	processor.shouldPlaySound = false;
+	processor.shouldPlaySound->setValueNotifyingHost( !processor.shouldPlaySound->get());// If not true,will  No sound  will play!! !
 }
 
 /// <summary>
@@ -62,7 +62,7 @@ void Pfmproject00AudioProcessorEditor::mouseUp(const MouseEvent& e)
 /// <param name="e">The e mouse event</param>
 void Pfmproject00AudioProcessorEditor::mouseDown(const MouseEvent& e)
 {
-	//DBG("mouse is Down");
-	processor.shouldPlaySound = true;
+	//DBG("mouse is Down");//True!!
+	
 
 }

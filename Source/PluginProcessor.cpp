@@ -24,6 +24,8 @@ Pfmproject00AudioProcessor::Pfmproject00AudioProcessor()
 	)
 #endif
 {
+	shouldPlaySound = new AudioParameterBool("shouldPlaySound", "shouldPlaySound", false);//  parameters of AudioParameterBool :const String& parameterID, const String& parameterName, bool defaultValue
+	addParameter(shouldPlaySound);
 }
 
 Pfmproject00AudioProcessor::~Pfmproject00AudioProcessor()
@@ -155,7 +157,7 @@ void Pfmproject00AudioProcessor::processBlock(AudioBuffer<float>& buffer, MidiBu
 	{
      for(int channel = 0;channel< buffer.getNumChannels(); ++channel)
 	 {
-		 if (shouldPlaySound)
+		 if (shouldPlaySound->get())
 		 {
 			 buffer.setSample(channel, i, r.nextFloat());
 		 }
