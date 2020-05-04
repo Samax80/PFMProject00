@@ -25,7 +25,7 @@ Pfmproject00AudioProcessorEditor::Pfmproject00AudioProcessorEditor (Pfmproject00
 /// </summary>
 Pfmproject00AudioProcessorEditor::~Pfmproject00AudioProcessorEditor()
 {	
-	processor.shouldPlaySound = false; //if the GUI is closed the  processor.shouldPlaySound  will be set to false.
+	processor.shouldPlaySound->setValueNotifyingHost(false); //if the GUI is closed the  processor.shouldPlaySound  will be set to false.
 }
 
 //==============================================================================
