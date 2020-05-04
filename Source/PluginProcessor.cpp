@@ -198,7 +198,7 @@ void Pfmproject00AudioProcessor::setStateInformation(const void* data, int sizeI
 /*Updates the Parameter and notifying the Host to  correctly handle the  automation  */
 void Pfmproject00AudioProcessor::UpdateAutomatableParameter(RangedAudioParameter* param, float value)
 {
-	param->beginChangeGesture;
+	param->beginChangeGesture();
 	param->setValueNotifyingHost(value);
 	param->endChangeGesture();
 }
