@@ -54,10 +54,10 @@ public:
     //==============================================================================
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
-
+	bool shouldPlaySound = false;
 private:
 	Random r;
-	bool shouldPlaySound = true;
+	
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Pfmproject00AudioProcessor)
 };
