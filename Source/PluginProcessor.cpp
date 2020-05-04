@@ -195,6 +195,13 @@ void Pfmproject00AudioProcessor::setStateInformation(const void* data, int sizeI
 	// whose contents will have been created by the getStateInformation() call.
 }
 
+/*Updates the Parameter and notifying the Host to  correctly handle the  automation  */
+void Pfmproject00AudioProcessor::UpdateAutomatableParameter(RangedAudioParameter* param, float value)
+{
+	param->beginChangeGesture;
+	param->setValueNotifyingHost(value);
+	param->endChangeGesture();
+}
 //==============================================================================
 // This creates new instances of the plugin..
 AudioProcessor* JUCE_CALLTYPE createPluginFilter()
