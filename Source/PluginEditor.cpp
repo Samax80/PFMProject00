@@ -53,7 +53,9 @@ void Pfmproject00AudioProcessorEditor::resized()
 void Pfmproject00AudioProcessorEditor::mouseUp(const MouseEvent& e)
 {
 //	DBG("mouse is Up");
+	processor.shouldPlaySound->beginChangeGesture();
 	processor.shouldPlaySound->setValueNotifyingHost( !processor.shouldPlaySound->get());// If not true,will  No sound  will play!! !
+	processor.shouldPlaySound->endChangeGesture();
 }
 
 /// <summary>
