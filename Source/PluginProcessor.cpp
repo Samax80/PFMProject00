@@ -21,13 +21,16 @@ Pfmproject00AudioProcessor::Pfmproject00AudioProcessor()
 #endif
 		.withOutput("Output", AudioChannelSet::stereo(), true)
 #endif
-	)
+	),
 #endif
+	apvts(*this, nullptr)
 {
-	shouldPlaySound = new AudioParameterBool("shouldPlaySound", "shouldPlaySound", false);//  parameters of AudioParameterBool :const String& parameterID, const String& parameterName, bool defaultValue
-	addParameter(shouldPlaySound);
+	//shouldPlaySound = new AudioParameterBool("shouldPlaySound", "shouldPlaySound", false);//  parameters of AudioParameterBool :const String& parameterID, const String& parameterName, bool defaultValue
+	//addParameter(shouldPlaySound);
+	auto shouldPlaySoundParam = std::make_unique<AudioParameterBool>("ShouldPlaySoundParam", "shouldPlaySoundParam", false);
+	auto* param = apvts.createAndAddParameter(std::move(shouldPlaySoundParam));
+	apvts.state = ValueTree("PFMSynthValueTree");
 }
-
 Pfmproject00AudioProcessor::~Pfmproject00AudioProcessor()
 {
 }
@@ -184,15 +187,26 @@ AudioProcessorEditor* Pfmproject00AudioProcessor::createEditor()
 //==============================================================================
 void Pfmproject00AudioProcessor::getStateInformation(MemoryBlock& destData)
 {
+	
+
 	// You should use this method to store your parameters in the memory block.
 	// You could do that either as raw data, or use the XML or ValueTree classes
 	// as intermediaries to make it easy to save and load complex data.
+
+	DBG(apvts.state.toXmlString());
+	MemoryOutputStream mos(destData, false);
+	apvts.state.writeToStream(mos);
 }
 
 void Pfmproject00AudioProcessor::setStateInformation(const void* data, int sizeInBytes)
 {
+	
 	// You should use this method to restore your parameters from this memory block,
 	// whose contents will have been created by the getStateInformation() call.
+
+	MemoryBlock mb(data, static_cast<size_t>(sizeInBytes));//we did a cast(static) from int to size_t
+	MemoryInputStream mis(mb, false);
+	apvts.state.readFromStream(mis);
 }
 
 /*Updates the Parameter and notifying the Host to  correctly handle the  automation  */

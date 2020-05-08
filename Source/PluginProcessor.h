@@ -7,6 +7,13 @@
 
   ==============================================================================
 */
+/*
+TODO:
+cliclk anywhere on the window, and  play a note
+if you click and drag,it'll change the pitch of the note
+save plugin state when exisitng DAW
+load plugin state whn loading a session
+*/
 
 #pragma once
 
@@ -60,6 +67,7 @@ public:
 	
 	static void UpdateAutomatableParameter(RangedAudioParameter*, float value);
 private:
+	AudioProcessorValueTreeState apvts;
 	Random r;
 	
     //==============================================================================
