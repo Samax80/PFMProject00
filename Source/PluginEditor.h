@@ -27,8 +27,10 @@ public:
     void resized() override;
 	void mouseUp(const MouseEvent& e) override;//manage the mouseup event
 	void mouseDown(const MouseEvent& e) override;//manage the mousedown event
+	void mouseDrag(const MouseEvent& e) override;//manage the mousedown event
 
 private:
+	Point<int> lastClickPosition;
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     Pfmproject00AudioProcessor& processor;

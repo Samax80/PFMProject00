@@ -29,6 +29,13 @@ Pfmproject00AudioProcessor::Pfmproject00AudioProcessor()
 	//addParameter(shouldPlaySound);
 	auto shouldPlaySoundParam = std::make_unique<AudioParameterBool>("ShouldPlaySoundParam", "shouldPlaySoundParam", false);
 	auto* param = apvts.createAndAddParameter(std::move(shouldPlaySoundParam));
+	
+	shouldPlaySound = dynamic_cast<AudioParameterBool*> (param);
+
+	auto bgColorParam = std::make_unique<AudioParameterFloat>("Background Color", "Background Color", 0.f, 0.1f, 0.5f);
+	param = apvts.createAndAddParameter(std::move(bgColorParam));
+	bgColor = dynamic_cast<AudioParameterFloat*>(param);
+
 	apvts.state = ValueTree("PFMSynthValueTree");
 }
 Pfmproject00AudioProcessor::~Pfmproject00AudioProcessor()

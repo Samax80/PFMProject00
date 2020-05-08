@@ -64,8 +64,8 @@ void Pfmproject00AudioProcessorEditor::mouseUp(const MouseEvent& e)
 		//processor.shouldPlaySound->setValueNotifyingHost( !processor.shouldPlaySound->get());// If not true,will  No sound  will play!! !
 		//processor.shouldPlaySound->endChangeGesture();
 
-		//NEW WAY
-	Pfmproject00AudioProcessor::UpdateAutomatableParameter(processor.shouldPlaySound, !processor.shouldPlaySound->get());//!processor.shouldPlaySound->get() EVEN IS A BOOL A FLOAT VALUE  WILL BE RETURN WHEN TRUE =1 OR FALSE =0
+		//NEW WAY uncomment to get noise when  mouse click is performed!!!
+	//Pfmproject00AudioProcessor::UpdateAutomatableParameter(processor.shouldPlaySound, !processor.shouldPlaySound->get());//!processor.shouldPlaySound->get() EVEN IS A BOOL A FLOAT VALUE  WILL BE RETURN WHEN TRUE =1 OR FALSE =0
 }
 
 /// <summary>
@@ -75,6 +75,16 @@ void Pfmproject00AudioProcessorEditor::mouseUp(const MouseEvent& e)
 void Pfmproject00AudioProcessorEditor::mouseDown(const MouseEvent& e)
 {
 	//DBG("mouse is Down");//True!!
+	lastClickPosition = e.getPosition();
+
+}
+
+
+
+void Pfmproject00AudioProcessorEditor::mouseDrag(const MouseEvent& e)
+{
 	
+	auto clickPos = e.getPosition();
+	DBG(clickPos.toString());//show at screen the value of clickPos as string!!
 
 }

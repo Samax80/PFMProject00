@@ -63,7 +63,7 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 	
 	AudioParameterBool* shouldPlaySound= nullptr ;
-	
+	AudioParameterFloat* bgColor = nullptr;
 	
 	static void UpdateAutomatableParameter(RangedAudioParameter*, float value);
 private:
