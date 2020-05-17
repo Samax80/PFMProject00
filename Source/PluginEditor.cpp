@@ -17,6 +17,7 @@ Pfmproject00AudioProcessorEditor::Pfmproject00AudioProcessorEditor (Pfmproject00
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
+	cachedBgColor = processor.bgColor->get();
     setSize (400, 300);
 }
 
@@ -39,7 +40,7 @@ Pfmproject00AudioProcessorEditor::~Pfmproject00AudioProcessorEditor()
 void Pfmproject00AudioProcessorEditor::paint (Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
+    g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId).interpolatedWith(Colours::red,cachedBgColor));
 
     g.setColour (Colours::white);
     g.setFont (19.0f);
@@ -56,6 +57,7 @@ void Pfmproject00AudioProcessorEditor::resized()
 ///  play sound when the Mouse Up.
 /// </summary>
 /// <param name="e">The e mouse event </param>
+
 void Pfmproject00AudioProcessorEditor::mouseUp(const MouseEvent& e)
 {
 	//	DBG("mouse is Up");
@@ -72,6 +74,7 @@ void Pfmproject00AudioProcessorEditor::mouseUp(const MouseEvent& e)
 /// play sound when the Mouse down.
 /// </summary>
 /// <param name="e">The e mouse event</param>
+
 void Pfmproject00AudioProcessorEditor::mouseDown(const MouseEvent& e)
 {
 	//DBG("mouse is Down");//True!!
@@ -85,6 +88,12 @@ void Pfmproject00AudioProcessorEditor::mouseDrag(const MouseEvent& e)
 {
 	
 	auto clickPos = e.getPosition();
-	DBG(clickPos.toString());//show at screen the value of clickPos as string!!
+	//DBG(clickPos.toString());//show at screen the value of clickPos as string!!
+	auto difY = jlimit(-1.0, 1.0, -(clickPos.y - lastClickPosition.y) / 200.0);
+	difY = jmap(difY, -1.0, 1.0, 0.0, 1.0);
+	DBG("dify:" << difY);
 
+	Pfmproject00AudioProcessor::UpdateAutomatableParameter(processor.bgColor, difY);
+	cachedBgColor = processor.bgColor->get();
+	repaint();
 }

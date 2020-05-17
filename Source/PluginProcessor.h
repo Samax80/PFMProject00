@@ -9,7 +9,8 @@
 */
 /*
 TODO:
-cliclk anywhere on the window, and  play a note
+click anywhere on the window, and  play a note
+automation should update window display
 if you click and drag,it'll change the pitch of the note
 save plugin state when exisitng DAW
 load plugin state whn loading a session
