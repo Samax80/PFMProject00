@@ -147,6 +147,9 @@ void Pfmproject00AudioProcessor::processBlock(AudioBuffer<float>& buffer, MidiBu
 	auto totalNumInputChannels = getTotalNumInputChannels();
 	auto totalNumOutputChannels = getTotalNumOutputChannels();
 
+	
+	
+
 	// In case we have more outputs than inputs, this code clears any output
 	// channels that didn't contain input data, (because these aren't
 	// guaranteed to be empty - they may contain garbage).
@@ -163,13 +166,27 @@ void Pfmproject00AudioProcessor::processBlock(AudioBuffer<float>& buffer, MidiBu
 	// Alternatively, you can process the samples with the channels
 	// interleaved by keeping the same state.
 	Random r;
+	
+	
+
 	for (int i = 0; i < buffer.getNumSamples(); ++i)
 	{
+		
+		
+		auto noise = r.nextFloat();
      for(int channel = 0;channel< buffer.getNumChannels(); ++channel)
 	 {
-		 if (shouldPlaySound->get())
+		 noise = channel == 1 ? r.nextFloat() : 0;//if channel is 0(left) noise value  will be  r.nextFloat() else (right channel) will be 0.
+
+		 //paner value 0-90
+		
+		 
+
+		
+		 
+		 if (shouldPlaySound->get())//if value is returned( is true ) and  buffer is updated with random noise
 		 {
-			 buffer.setSample(channel, i, r.nextFloat());
+			 buffer.setSample(channel, i, noise);
 		 }
 		 else
 		 {
