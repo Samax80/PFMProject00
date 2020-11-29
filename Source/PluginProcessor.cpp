@@ -107,6 +107,8 @@ void Pfmproject00AudioProcessor::changeProgramName(int index, const String& newN
 //==============================================================================
 void Pfmproject00AudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
+	auto floatSample = (float)sampleRate;
+	samax_Compressor.PrepareForPlayback(floatSample);
 	// Use this method as the place to do any pre-playback
 	// initialisation that you need..
 }
@@ -173,25 +175,31 @@ void Pfmproject00AudioProcessor::processBlock(AudioBuffer<float>& buffer, MidiBu
 	{
 		
 		
-		auto noise = r.nextFloat();
+		auto noise =r.nextFloat();
+		//auto& ref  = noise ;
+
      for(int channel = 0;channel< buffer.getNumChannels(); ++channel)
 	 {
-		 noise = channel == 1 ? r.nextFloat() : 0;//if channel is 0(left) noise value  will be  r.nextFloat() else (right channel) will be 0.
+		// noise = channel == 1 ? noise : 0;//if channel is 0(left) noise value  will be  r.nextFloat() else (right channel) will be 0.
 
-		 //paner value 0-90
-		
+		 float* channelData = buffer.getWritePointer(channel);
 		 
 
 		
 		 
 		 if (shouldPlaySound->get())//if value is returned( is true ) and  buffer is updated with random noise
 		 {
-			 buffer.setSample(channel, i, noise);
+			buffer.setSample(channel, i, noise);
+			
+
+			samax_Compressor.ProcessAudioSample(channelData[i]);
 		 }
 		 else
 		 {
 			 buffer.setSample(channel, i, 0);
 		 }
+
+		 
 	 }
 
 	}
@@ -228,9 +236,16 @@ void Pfmproject00AudioProcessor::setStateInformation(const void* data, int sizeI
 	// You should use this method to restore your parameters from this memory block,
 	// whose contents will have been created by the getStateInformation() call.
 
-	MemoryBlock mb(data, static_cast<size_t>(sizeInBytes));//we did a cast(static) from int to size_t
-	MemoryInputStream mis(mb, false);
-	apvts.state.readFromStream(mis);
+	//HERE WE SAVE THE LATEST STATE 
+	ValueTree tree = ValueTree::readFromData(data, sizeInBytes);
+
+	if (tree.isValid())
+	{
+
+		apvts.state = tree;
+	}
+
+	DBG( apvts.state.toXmlString() );
 }
 
 /*Updates the Parameter and notifying the Host to  correctly handle the  automation  */

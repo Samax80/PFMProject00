@@ -3,6 +3,20 @@
 <JUCERPROJECT id="tKZWRp" name="PFMProject00" projectType="audioplug" jucerVersion="5.4.7"
               pluginCharacteristicsValue="pluginIsSynth">
   <MAINGROUP id="RoobMu" name="PFMProject00">
+    <GROUP id="{F8226315-9CE8-2A25-7C8A-20932A859881}" name="dsp_samax_Dynamics">
+      <FILE id="kquMkU" name="Compressor.cpp" compile="1" resource="0" file="Source/Compressor.cpp"/>
+      <FILE id="IB5GmF" name="Compressor.h" compile="0" resource="0" file="Source/Compressor.h"/>
+      <FILE id="ybQQAU" name="EnveloperShaper.cpp" compile="1" resource="0"
+            file="Source/EnveloperShaper.cpp"/>
+      <FILE id="smKUZ0" name="EnveloperShaper.h" compile="0" resource="0"
+            file="Source/EnveloperShaper.h"/>
+    </GROUP>
+    <GROUP id="{1B929C94-0301-27E5-E26A-19E0AE0F0CF2}" name="dsp_samax">
+      <FILE id="cNUcIq" name="AudioDevEffectBase.cpp" compile="1" resource="0"
+            file="Source/AudioDevEffectBase.cpp"/>
+      <FILE id="yimGRZ" name="AudioDevEffectBase.h" compile="0" resource="0"
+            file="Source/AudioDevEffectBase.h"/>
+    </GROUP>
     <GROUP id="{557BFC5D-948F-428A-18EA-7F67D577A24D}" name="Source">
       <FILE id="D3gvkp" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>

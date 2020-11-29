@@ -19,6 +19,7 @@ load plugin state whn loading a session
 #pragma once
 
 #include <JuceHeader.h>
+#include "Compressor.h"
 
 //==============================================================================
 /**
@@ -70,7 +71,7 @@ public:
 private:
 	AudioProcessorValueTreeState apvts;
 	Random r;
-	
+	Compressor samax_Compressor;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Pfmproject00AudioProcessor)
 };
